@@ -1,5 +1,5 @@
 ### SLS ReID
-![](./images/cmc_curve.png)
+![](./images/cmc_curve.jpg)
 ### Datasets
 - Download [Market1501 Dataset](http://www.liangzheng.org/Project/project_reid.html)
 - Download [DukeMTMC-reID Dataset](https://github.com/layumi/DukeMTMC-reID_evaluation)
