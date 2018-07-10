@@ -1,4 +1,4 @@
-# DCGAN in Tensorflow
+# DCGAN in Tensorflow for SLS
 
 ## Prerequisites
 
@@ -21,18 +21,39 @@ conda env create -f dcgan.yml
 source activate dcgan
 ```
 
-### Let's start
-
-### 1.Train
+### Training
 ```bash
 mkdir data
-ln -rs your_dataset_path/DukeMTMC-reID/bounding_box_train ./data/duke_train
+ln -rs your_dataset_path/market1501/bounding_box_train ./market_train
+```
+1. Train with the all training set
+```bash
 python main.py --dataset market_train --train
 ```
-`duke_train` is the dir path which contains images. Here I use the (DukeMTMC-reID)[https://github.com/layumi/DukeMTMC-reID_evaluation] training set. You can change it to your dataset path.
-
-### 2.Test
+`market_train` is the dir path which contains images. Here I use the [Market1501 Dataset](http://www.liangzheng.org/Project/project_reid.html) training set. You can change it to your dataset path.
+2. Train each clusters with `parent_checkpoint` the saved checkpoint of 1.
 ```bash
-python main.py --dataset duke_train --options 5  --output_path duke_256_48000  --sample_size 48000  --input_height 128 --output_height 128
+python main.py --dataset cluster_0 --train --parent_checkpoint market_train_64_128_128
+python main.py --dataset cluster_1 --train --parent_checkpoint market_train_64_128_128
+python main.py --dataset cluster_2 --train --parent_checkpoint market_train_64_128_128
 ```
-It will use your trained model and generate 48000 images for the following semi-supervised training.
+### Use pre-trained
+Or you can download the pre-trained model and saved them in `./checkpoint`
+
+| Dataset | checkpoint |
+| --- | --- |
+| Market1501`--parent_checkpoint` | [market_train_64_128_128](#)|
+| 4 clusters for market1501 | [cluster_0_64_128_128](#), [cluster_1_64_128_128](#), [cluster_2_64_128_128](#), [cluster_4_64_128_128](#)
+| 3 clusters for market1501 | [cluster_0_64_128_128](#), [cluster_1_64_128_128](#), [cluster_2_64_128_128](#) |
+| 2 clusters for market1501 | [cluster_0_64_128_128](#), [cluster_1_64_128_128](#) |
+| DukeMTMC-reID `--parent_checkpoint` | [duke_train_64_128_128](#) |
+| 3 clusters for Duke | [cluster_0_64_128_128](#), [cluster_1_64_128_128](#), [cluster_2_64_128_128](#) |
+
+
+### Generate samples
+```bash
+python main.py --dataset cluster_0 --options 5  --output_path generated  --sample_size 12036
+python main.py --dataset cluster_1 --options 5  --output_path generated  --sample_size 12036
+python main.py --dataset cluster_2 --options 5  --output_path generated  --sample_size 12036
+```
+It will use the trained model of each cluster and generate `sample_size` images for the following semi-supervised training.
