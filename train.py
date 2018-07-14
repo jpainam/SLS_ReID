@@ -295,38 +295,14 @@ if use_gpu:
 
 criterion = nn.CrossEntropyLoss()
 
-if not opt.PCB:
-    ignored_params = list(map(id, model.model.fc.parameters())) + list(map(id, model.classifier.parameters()))
-    base_params = filter(lambda p: id(p) not in ignored_params, model.parameters())
-    optimizer_ft = optim.SGD([
-        {'params': base_params, 'lr': 0.01},
-        {'params': model.model.fc.parameters(), 'lr': 0.1},
-        {'params': model.classifier.parameters(), 'lr': 0.1}
-    ], weight_decay=5e-4, momentum=0.9, nesterov=True)
-else:
-    ignored_params = list(map(id, model.model.fc.parameters()))
-    ignored_params += (list(map(id, model.classifier0.parameters()))
-                       + list(map(id, model.classifier1.parameters()))
-                       + list(map(id, model.classifier2.parameters()))
-                       + list(map(id, model.classifier3.parameters()))
-                       + list(map(id, model.classifier4.parameters()))
-                       + list(map(id, model.classifier5.parameters()))
-                       # +list(map(id, model.classifier6.parameters() ))
-                       # +list(map(id, model.classifier7.parameters() ))
-                       )
-    base_params = filter(lambda p: id(p) not in ignored_params, model.parameters())
-    optimizer_ft = optim.SGD([
-        {'params': base_params, 'lr': 0.01},
-        {'params': model.model.fc.parameters(), 'lr': 0.1},
-        {'params': model.classifier0.parameters(), 'lr': 0.1},
-        {'params': model.classifier1.parameters(), 'lr': 0.1},
-        {'params': model.classifier2.parameters(), 'lr': 0.1},
-        {'params': model.classifier3.parameters(), 'lr': 0.1},
-        {'params': model.classifier4.parameters(), 'lr': 0.1},
-        {'params': model.classifier5.parameters(), 'lr': 0.1},
-        # {'params': model.classifier6.parameters(), 'lr': 0.01},
-        # {'params': model.classifier7.parameters(), 'lr': 0.01}
-    ], weight_decay=5e-4, momentum=0.9, nesterov=True)
+
+ignored_params = list(map(id, model.model.fc.parameters())) + list(map(id, model.classifier.parameters()))
+base_params = filter(lambda p: id(p) not in ignored_params, model.parameters())
+optimizer_ft = optim.SGD([
+    {'params': base_params, 'lr': 0.01},
+    {'params': model.model.fc.parameters(), 'lr': 0.1},
+    {'params': model.classifier.parameters(), 'lr': 0.1}
+], weight_decay=5e-4, momentum=0.9, nesterov=True)
 
 # Decay LR by a factor of 0.1 every 40 epochs
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=40, gamma=0.1)
