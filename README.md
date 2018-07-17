@@ -20,10 +20,10 @@ python sls_train.py --use_dense
 
 | Dataset | Dense Baseline | ResNet Baseline |Dense SLS_ReID | ResNet SLS_ReID |
 | --- | --- | --- | --- | --- | 
-| Market-1501 | [market/dense_baseline.pth](https://drive.google.com/open?id=18_rb1c3m8YohQVv0ecWL1sgSKiaRNLur) | [market/slsreid.pth]() | [cuhk03/slsreid.pth]() | [cuhk03/slsreid.pth]() | 
-| CUHK03 | [cuhk03/dense_baseline.pth]() | [cuhk03/slsreid.pth]() | [cuhk03/slsreid.pth]() | [cuhk03/slsreid.pth]() | 
-| VIPeR | [viper/dense_baseline.pth](https://drive.google.com/open?id=15MToMvqenWW7XmygATfm0WdjXIk6kU2J) | [viper/slsreid.pth]() | [cuhk03/slsreid.pth]() | [cuhk03/slsreid.pth]() |  
-| DukeMTMCReID | [duke/baseline.pth]() | [duke/slsreid.pth]() | [duke/slsreid.pth](https://drive.google.com/open?id=139ngCD9PuHIQvqV4X5bZ-4_Y8G-ZQ03S)| [cuhk03/slsreid.pth]() |
+| Market-1501 | [market/dense_baseline.pth](https://drive.google.com/open?id=18_rb1c3m8YohQVv0ecWL1sgSKiaRNLur) | [market/resnet_baseline.pth]() | [cuhk03/dense_slsreid.pth]() | [market/resnet_slsreid.pth]() | 
+| CUHK03 | [cuhk03/dense_baseline.pth]() | [cuhk03/resnet_baseline.pth]() | [cuhk03/dense_slsreid.pth]() | [cuhk03/resnet_slsreid.pth]() | 
+| VIPeR | [viper/dense_baseline.pth](https://drive.google.com/open?id=15MToMvqenWW7XmygATfm0WdjXIk6kU2J) | [viper/resnet_baseline.pth]() | [viper/dense_slsreid.pth]() | [viper/resnet_slsreid.pth]() |  
+| DukeMTMCReID | [duke/dense_baseline.pth]() | [duke/resnet_baseline.pth]() | [duke/dense_slsreid.pth](https://drive.google.com/open?id=139ngCD9PuHIQvqV4X5bZ-4_Y8G-ZQ03S)| [duke/resnet_slsreid.pth]() |
 
 ### Testing
 
