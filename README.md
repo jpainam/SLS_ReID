@@ -12,6 +12,7 @@ python test_cuhk03.py --which_epoch 59 --name cuhk03_dense --use_dense
 python eval_cuhk03.py
 ```
 ###Currents results after
+
 | Dataset | Rank 1 | Rank 5 | Rank 10 | Rank 20 | mAP |
 | --- | --- | --- | --- | --- | --- |
 | CUHK03-Dense Baseline | 0.679181 | 0.909378 | 0.953513 | 0.977772 | 0.781033 |
