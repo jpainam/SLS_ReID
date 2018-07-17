@@ -15,13 +15,11 @@ from dataset_loader import ImageDataset
 
 import argparse
 parser = argparse.ArgumentParser(description='Training')
-parser.add_argument('--gpu_ids',default='0', type=str,help='gpu_ids: e.g. 0  0,1,2  0,2')
-parser.add_argument('--which_epoch',default='last', type=str, help='0,1,2,3...or last')
-parser.add_argument('--data_dir',default='cuhk03',type=str, help='./test_data')
-parser.add_argument('--name', default='resnet', type=str, help='save model path')
+parser.add_argument('--model_path', default='resnet', type=str, help='save model path')
 parser.add_argument('--batchsize', default=32, type=int, help='batchsize')
-parser.add_argument('--use_dense', action='store_true', help='use densenet121' )
-parser.add_argument('--n_classe', default=1367, help='n classes' )
+parser.add_argument('--use_dense', action='store_true', help='use densenet')
+parser.add_argument('--n_classe', default=1367, help='n classes')
+parser.add_argument('--dataset', default='/home/paul/datasets', type=str, help='Path to the dataset')
 
 opt = parser.parse_args()
 n_classe = opt.n_classe
@@ -82,12 +80,12 @@ def test(model, queryloader, galleryloader, use_gpu, ranks=[1, 5, 10, 20]):
               'query_feature': qf.numpy(), 'gallery_feature': gf.numpy()}
     print(qf.numpy())
     print(gf.numpy())
-    scipy.io.savemat('./plsro_result.mat', result)
+    scipy.io.savemat('./result.mat', result)
 
 
 
 def load_network(network):
-    save_path = os.path.join('./'+opt.data_dir+'/'+opt.name+'/net_%s.pth' %opt.which_epoch)
+    save_path = os.path.join(opt.model_path)
     network.load_state_dict(torch.load(save_path))
     return network
 
@@ -97,11 +95,6 @@ use_dense = opt.use_dense
 if __name__ == '__main__':
 
     use_gpu = torch.cuda.is_available()
-    height = 224
-    width = 224
-    if opt.use_dense:
-        height = 144
-        width = 288
     data_transforms = transforms.Compose([
         transforms.Resize((288, 144), interpolation=3),
         transforms.ToTensor(),
@@ -120,7 +113,7 @@ if __name__ == '__main__':
         model = model.cuda()
 
     dataset = data_manager.init_img_dataset(
-        root='/home/paul/datasets', name=opt.data_dir, split_id=0, cuhk03_classic_split=True)
+        root=opt.dataset, name='cuhk03', split_id=0, cuhk03_classic_split=True)
 
     queryloader = DataLoader(
         ImageDataset(dataset.query, transform=data_transforms),
