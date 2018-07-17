@@ -18,12 +18,12 @@ python sls_train.py --use_dense
 
 ### Pre-trained models
 
-| Dataset | Baselines | SLS_ReID |
-| --- | --- | ---|
-| Market-1501 | [market/model.pth]() | [market/slsreid.pth]() | 
-| CUHK03 | [cuhk03/model.pth]() | [cuhk03/slsreid.pth]() | 
-| VIPeR | [viper/model.pth]() | [viper/slsreid.pth]() | 
-| DukeMTMCReID | [duke/model.pth]() | [duke/slsreid.pth]() | 
+| Dataset | Dense Baseline | ResNet Baseline |Dense SLS_ReID | ResNet SLS_ReID |
+| --- | --- | --- | --- | --- | 
+| Market-1501 | [market/dense_baseline.pth](https://drive.google.com/open?id=18_rb1c3m8YohQVv0ecWL1sgSKiaRNLur) | [market/slsreid.pth]() | [cuhk03/slsreid.pth]() | [cuhk03/slsreid.pth]() | 
+| CUHK03 | [cuhk03/dense_baseline.pth]() | [cuhk03/slsreid.pth]() | [cuhk03/slsreid.pth]() | [cuhk03/slsreid.pth]() | 
+| VIPeR | [viper/dense_baseline.pth](https://drive.google.com/open?id=15MToMvqenWW7XmygATfm0WdjXIk6kU2J) | [viper/slsreid.pth]() | [cuhk03/slsreid.pth]() | [cuhk03/slsreid.pth]() |  
+| DukeMTMCReID | [duke/baseline.pth]() | [duke/slsreid.pth]() | [duke/slsreid.pth](https://drive.google.com/open?id=139ngCD9PuHIQvqV4X5bZ-4_Y8G-ZQ03S)| [cuhk03/slsreid.pth]() |
 
 ### Testing
 
