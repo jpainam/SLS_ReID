@@ -15,6 +15,16 @@ python train.py --use_dense
 ```bash
 python sls_train.py --use_dense
 ```
+
+### Pre-trained models
+
+| Dataset | Baselines | SLS_ReID |
+| --- | --- | ---|
+| Market-1501 | [market/model.pth]() | [market/slsreid.pth]() | 
+| CUHK03 | [cuhk03/model.pth]() | [cuhk03/slsreid.pth]() | 
+| VIPeR | [viper/model.pth]() | [viper/slsreid.pth]() | 
+| DukeMTMCReID | [duke/model.pth]() | [duke/slsreid.pth]() | 
+
 ### Testing
 
 ```bash
