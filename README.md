@@ -6,14 +6,19 @@
 - Download [CUHK03 Dataset](http://www.ee.cuhk.edu.hk/~xgwang/CUHK_identification.html)
 - Download [VIPeR Dataset](https://vision.soe.ucsc.edu/node/178)
 
-###Testing
+### Training
+- Train the baseline
+```bash
+python train.py
+```
+### Testing
 
 ```bash
 python test_cuhk03.py --model_path ./cuhk03/model.pth --use_dense
 python eval_cuhk03.py
 ```
 
-###Currents results after
+### Currents results
 
 | Dataset | Rank 1 | Rank 5 | Rank 10 | Rank 20 | mAP |
 | --- | --- | --- | --- | --- | --- |

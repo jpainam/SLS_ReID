@@ -33,8 +33,7 @@ parser.add_argument('--train_all', action='store_true', help='use all training d
 parser.add_argument('--color_jitter', action='store_true', help='use color jitter in training')
 parser.add_argument('--batchsize', default=32, type=int, help='batchsize')
 parser.add_argument('--erasing_p', default=0, type=float, help='Random Erasing probability, in [0,1]')
-parser.add_argument('--use_dense', action='store_true', help='use densenet121')
-parser.add_argument('--PCB', action='store_true', help='use PCB+ResNet50')
+parser.add_argument('--use_dense', action='store_true', help='use densenet')
 opt = parser.parse_args()
 
 data_dir = opt.data_dir
@@ -186,22 +185,9 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 
                 # forward
                 outputs = model(inputs)
-                if not opt.PCB:
-                    _, preds = torch.max(outputs.data, 1)
-                    loss = criterion(outputs, labels)
-                else:
-                    part = {}
-                    sm = nn.Softmax(dim=1)
-                    num_part = 6
-                    for i in range(num_part):
-                        part[i] = outputs[i]
+                _, preds = torch.max(outputs.data, 1)
+                loss = criterion(outputs, labels)
 
-                    score = sm(part[0]) + sm(part[1]) + sm(part[2]) + sm(part[3]) + sm(part[4]) + sm(part[5])
-                    _, preds = torch.max(score.data, 1)
-
-                    loss = criterion(part[0], labels)
-                    for i in range(num_part - 1):
-                        loss += criterion(part[i + 1], labels)
 
                 # backward + optimize only if in training phase
                 if phase == 'train':
@@ -245,23 +231,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 # Draw Curve
 # ---------------------------
 x_epoch = []
-'''fig = plt.figure()
-#ax0 = fig.add_subplot(121, title="loss")
-#ax1 = fig.add_subplot(122, title="top1err")
 
-
-def draw_curve(current_epoch):
-    x_epoch.append(current_epoch)
-    ax0.plot(x_epoch, y_loss['train'], 'bo-', label='train')
-    ax0.plot(x_epoch, y_loss['val'], 'ro-', label='val')
-    ax1.plot(x_epoch, y_err['train'], 'bo-', label='train')
-    ax1.plot(x_epoch, y_err['val'], 'ro-', label='val')
-    if current_epoch == 0:
-        ax0.legend()
-        ax1.legend()
-    fig.savefig(os.path.join('./model', name, 'train.jpg'))
-
-'''
 ######################################################################
 # Save model
 # ---------------------------
@@ -284,9 +254,6 @@ if opt.use_dense:
     model = ft_net_dense(len(class_names))
 else:
     model = ft_net(len(class_names))
-
-if opt.PCB:
-    model = PCB(len(class_names))
 
 #print(model)
 
