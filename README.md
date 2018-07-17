@@ -50,14 +50,23 @@ python evaluate_rerank.py
 | `CUHK03-ResNet SLS_ReID` | 90.99% | 98.24% | 99.25% | 99.74% | 94.18% |
 | `VIPeR-Dense Baseline` | 63.45% | 72.78% | 79.11% | 86.23% | - |
 | `VIPeR-Dense SLS_ReID` | 67.41% | 81.01% | 88.61% | 93.51% | - |
-| `Market-1501-Dense Baseline` |
-| `Market-1501-Dense SLS_ReID` |
-| `Market-1501-ResNet Baseline` |
-| `Market-1501-ResNet SLS_ReID` |
-| `DukeMTMC-ReID-Dense Baseline` |
-| `DukeMTMC-ReID-Dense SLS_ReID` |
-| `DukeMTMC-ReID-ResNet Baseline` |
-| `DukeMTMC-ReID-ResNet SLS_ReID` |
+| `Market-1501-Dense Baseline` | 90.05% | 96.82% | 98.10% | 98.81% | 74.16% |
+| `Market-1501-Dense SLS_ReID` | 92.43% | 97.27% | 98.40% | - | 79.08% |							
+| `Market-1501-ResNet Baseline` | 87.29% | 95.57% | 96.94% | - | 69.70% |							
+| `Market-1501-ResNet SLS_ReID` | 89.16% | 95.78% | 97.33% | - | 75.15% |							
+| `DukeMTMC-ReID-Dense Baseline` | 79.67% | 89.85% | 92.86% | 95.11% | 63.19% |
+| `DukeMTMC-ReID-Dense SLS_ReID` | 82.94% | 91.69% | 94.43% | 95.96% | 67.78% |
+| `DukeMTMC-ReID-ResNet Baseline` | 76.66% | 87.83% | 91.47% | 93.76% | 58.35% |
+| `DukeMTMC-ReID-ResNet SLS_ReID` | 76.53% | 88.15% | 91.02% | 93.54% | 60.79% |
+
+### Multi-query results
+```bash
+ResNet baseline Rank@1:0.912708 Rank@5:0.968527 Rank@10:0.981888 mAP:0.769397							
+DenseNet baseline Rank@1:0.929038 Rank@5:0.978919 Rank@10:0.986936 mAP:0.812179							
+Resnet SLS_ReID Rank@1:0.922506 Rank@5:0.975059 Rank@10:0.983373 mAP:0.819236							
+Dense SLS_ReID Rank@1:0.940618 Rank@5:0.981591 Rank@10:0.988420 mAP:0.851966							
+```
+
 
 
 
