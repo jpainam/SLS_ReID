@@ -50,7 +50,14 @@ python evaluate_rerank.py
 | `CUHK03-ResNet SLS_ReID` | 90.99% | 98.24% | 99.25% | 99.74% | 94.18% |
 | `VIPeR-Dense Baseline` | 63.45% | 72.78% | 79.11% | 86.23% | - |
 | `VIPeR-Dense SLS_ReID` | 67.41% | 81.01% | 88.61% | 93.51% | - |
-
+| `Market-1501-Dense Baseline` |
+| `Market-1501-Dense SLS_ReID` |
+| `Market-1501-ResNet Baseline` |
+| `Market-1501-ResNet SLS_ReID` |
+| `DukeMTMC-ReID-Dense Baseline` |
+| `DukeMTMC-ReID-Dense SLS_ReID` |
+| `DukeMTMC-ReID-ResNet Baseline` |
+| `DukeMTMC-ReID-ResNet SLS_ReID` |
 
 
 
