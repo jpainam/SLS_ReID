@@ -9,7 +9,11 @@
 ### Training
 - Train the baseline
 ```bash
-python train.py
+python train.py --use_dense
+```
+- Train SLS_ReID
+```bash
+python sls_train.py --use_dense
 ```
 ### Testing
 

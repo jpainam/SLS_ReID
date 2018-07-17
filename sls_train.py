@@ -160,9 +160,9 @@ class dcganDataset(Dataset):
         return result
 
 
-class LSROloss(nn.Module):
+class SLSloss(nn.Module):
     def __init__(self):  # change target to range(0,750)
-        super(LSROloss, self).__init__()
+        super(SLSloss, self).__init__()
         # input means the prediction score(torch Variable) 32*752,target means the corresponding label,
 
     def forward(self, input, target,
@@ -345,7 +345,7 @@ else:
 
 if use_gpu:
     model = model.cuda()
-criterion = LSROloss()
+criterion = SLSloss()
 
 ignored_params = list(map(id, model.model.fc.parameters())) + list(map(id, model.classifier.parameters()))
 base_params = filter(lambda p: id(p) not in ignored_params, model.parameters())
