@@ -57,3 +57,6 @@ python main.py --dataset cluster_1 --options 5  --output_path generated  --sampl
 python main.py --dataset cluster_2 --options 5  --output_path generated  --sample_size 12036
 ```
 It will use the trained model of each cluster and generate `sample_size` images for the following semi-supervised training.
+
+### Download samples
+[Download samples - Google Drive](https://drive.google.com/open?id=139vpswFge7S50_ccsnnw4Hy4RRK7a-KY)
