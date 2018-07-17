@@ -20,6 +20,14 @@ python sls_train.py --use_dense
 ```bash
 python test_cuhk03.py --model_path ./cuhk03/model.pth --use_dense
 python eval_cuhk03.py
+----------
+python test_viper.py --model_path ./viper/model.pth --use_dense
+%Add --re_rank to get re-ranking with k-reciprocal encoding
+----------
+python test.py --model_path ./market/model.pth --use_dense
+python evaluate.py
+python evaluate_rerank.py 
+%Add --multi for multi-query evaluation
 ```
 
 ### Currents results
