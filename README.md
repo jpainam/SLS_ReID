@@ -38,6 +38,10 @@ python evaluate_rerank.py
 | `CUHK03-Dense SLS_ReID` | 0.843203 | 0.971337 | 0.989171 | 0.996290 | 0.899174 |
 | `CUHK03-ResNet Baseline` |0.750155 | 0.950839 | 0.979171 | 0.991119 | 0.838676 |
 | `CUHK03-ResNet SLS_ReID` | 0.909938 | 0.982435 | 0.992477 | 0.997420 | 0.941790 |
+| `VIPeR-Dense Baseline` | 63.45% | 72.78% | 79.11% | 86.23% | - |
+| `VIPeR-Dense SLS_ReID` | 67.41% | 81.01% | 88.61% | 93.51% | - |
+
+
 
 
 
