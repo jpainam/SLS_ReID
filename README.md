@@ -59,13 +59,16 @@ python evaluate_rerank.py
 | `DukeMTMC-ReID-ResNet Baseline` | 76.66% | 87.83% | 91.47% | 93.76% | 58.35% |
 | `DukeMTMC-ReID-ResNet SLS_ReID` | 76.53% | 88.15% | 91.02% | 93.54% | 60.79% |
 
-### Multi-query results
+### Multi-query results for Market-1501 dataset
 ```bash
-ResNet baseline Rank@1:0.912708 Rank@5:0.968527 Rank@10:0.981888 mAP:0.769397							
-DenseNet baseline Rank@1:0.929038 Rank@5:0.978919 Rank@10:0.986936 mAP:0.812179							
-Resnet SLS_ReID Rank@1:0.922506 Rank@5:0.975059 Rank@10:0.983373 mAP:0.819236							
+ResNet baseline Rank@1:0.912708 Rank@5:0.968527 Rank@10:0.981888 mAP:0.769397	
+DenseNet baseline Rank@1:0.929038 Rank@5:0.978919 Rank@10:0.986936 mAP:0.812179	
+Resnet SLS_ReID Rank@1:0.922506 Rank@5:0.975059 Rank@10:0.983373 mAP:0.819236
 Dense SLS_ReID Rank@1:0.940618 Rank@5:0.981591 Rank@10:0.988420 mAP:0.851966							
 ```
+
+### References
+
 
 
 
