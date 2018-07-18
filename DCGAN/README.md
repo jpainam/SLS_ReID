@@ -58,7 +58,7 @@ python main.py --dataset cluster_2 --options 5  --output_path generated  --sampl
 ```
 It will use the trained model of each cluster and generate `sample_size` images for the following semi-supervised training.
 
-![](../images/gan_0_0.gif)![](../images/gan_0_1.gif)![](../images/gan_0_2.gif)![](../images/gan_0_3.gif)![](../images/gan_0_4.gif)![](../images/gan_0_5.gif)![](../images/gan_0_6.gif)![](../images/gan_0_7.gif)![](../images/gan_0_8.gif)![](../images/gan_0_9.gif)![](../images/gan_0_10.gif)![](../images/gan_0_11.gif)![](../images/gan_0_12.gif)
+![](../images/gan_0_0.gif)![](../images/gan_0_1.gif)![](../images/gan_0_2.gif)![](../images/gan_0_3.gif)![](../images/gan_0_4.gif)![](../images/gan_0_5.gif)![](../images/gan_0_6.gif)![](../images/gan_0_7.gif)![](../images/gan_0_8.gif)![](../images/gan_0_9.gif)![](../images/gan_0_10.gif)![](../images/gan_0_11.gif)
 
 ### Download samples
 [Download samples - Google Drive](https://drive.google.com/open?id=139vpswFge7S50_ccsnnw4Hy4RRK7a-KY)
