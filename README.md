@@ -6,24 +6,31 @@
 - Download [CUHK03 Dataset](http://www.ee.cuhk.edu.hk/~xgwang/CUHK_identification.html)
 - Download [VIPeR Dataset](https://vision.soe.ucsc.edu/node/178)
 
+### Dataset preperation
+Change the `download_path` to point to your dataset folder. Comment out `multi-query` except for `Market1501` dataset.
+```bash
+python prepare.py
+python re_index.py
+```
 ### Training
 - Train the baseline
 ```bash
-python train.py --use_dense
+python train.py 
 ```
 - Train SLS_ReID
 ```bash
-python sls_train.py --use_dense
+python sls_train.py 
 ```
+Add `--use_dense` argument to train using `DenseNet121` architecture
 
 ### Pre-trained models
 
 | Dataset | Dense Baseline | ResNet Baseline |Dense SLS_ReID | ResNet SLS_ReID |
 | --- | --- | --- | --- | --- | 
-| Market-1501 | [market/dense.pth](https://drive.google.com/open?id=18_rb1c3m8YohQVv0ecWL1sgSKiaRNLur) | [market/resnet.pth]() | [cuhk03/dense_slsreid.pth]() | [market/resnet_slsreid.pth]() | 
-| CUHK03 | [cuhk03/dense.pth]() | [cuhk03/resnet.pth](https://drive.google.com/open?id=1F53kR_L2bk4ePUWpzRPM8lus9l1JTbkI) | [cuhk03/dense_slsreid.pth]() | [cuhk03/resnet_slsreid.pth](https://drive.google.com/open?id=1D6cEuUmA9KcZ38d715XBdtT5kagSLZtc) | 
-| VIPeR | [viper/dense.pth](https://drive.google.com/open?id=15MToMvqenWW7XmygATfm0WdjXIk6kU2J) | [viper/resnet.pth]() | [viper/dense_slsreid.pth]() | [viper/resnet_slsreid.pth]() |  
-| DukeMTMCReID | [duke/dense.pth]() | [duke/resnet.pth]() | [duke/dense_slsreid.pth](https://drive.google.com/open?id=139ngCD9PuHIQvqV4X5bZ-4_Y8G-ZQ03S)| [duke/resnet_slsreid.pth]() |
+| Market-1501 | [market/dense.pth](https://drive.google.com/open?id=18_rb1c3m8YohQVv0ecWL1sgSKiaRNLur) | [market/resnet.pth](https://drive.google.com/open?id=1LUhaJR2k8jVtgdzKCbcgGmGoaj603OS9) | [cuhk03/dense_slsreid.pth](https://drive.google.com/open?id=1w9tENbW7XuWAcZ-i-MlIyMI6VCzjjf5z) | [market/resnet_slsreid.pth](https://drive.google.com/open?id=1COJy6QmGBxoqzR6TMruJuoR4PluB9lFY) | 
+| CUHK03 | [cuhk03/dense.pth](https://drive.google.com/open?id=13qp4MIcbDB3dMDvgEcdMocxXL2ISwlE6) | [cuhk03/resnet.pth](https://drive.google.com/open?id=1F53kR_L2bk4ePUWpzRPM8lus9l1JTbkI) | [cuhk03/dense_slsreid.pth](https://drive.google.com/open?id=1M4ADdNYUlY5ne4AGcvuNhO2rviq8FYNd) | [cuhk03/resnet_slsreid.pth](https://drive.google.com/open?id=1D6cEuUmA9KcZ38d715XBdtT5kagSLZtc) | 
+| VIPeR | [viper/dense.pth](https://drive.google.com/open?id=15MToMvqenWW7XmygATfm0WdjXIk6kU2J) | [viper/resnet.pth](https://drive.google.com/open?id=1cvEWoEflXGkp6FQ3n3_sa3gOGtbb4s2o) | [viper/dense_slsreid.pth](https://drive.google.com/open?id=1_gepm1yvi0dsoB3rv_uRof6MasSLVyg8) | [viper/resnet_slsreid.pth](https://drive.google.com/open?id=1iVwJC8VYfGaHoUJViZglS1v2tcb2wQi2) |  
+| DukeMTMCReID | [duke/dense.pth](https://drive.google.com/open?id=1tg-gEF87DoRLaBGVgfo6bXlZR-Rdm_uh) | [duke/resnet.pth](https://drive.google.com/open?id=1H-T-oegGeHB6x-QG5TEtFeMrrN1eLn_M) | [duke/dense_slsreid.pth](https://drive.google.com/open?id=139ngCD9PuHIQvqV4X5bZ-4_Y8G-ZQ03S)| [duke/resnet_slsreid.pth](https://drive.google.com/open?id=1a6scaF0-rnTbpn5gbEGlzgXhK0R4X_LI) |
 
 ### Testing
 
@@ -60,12 +67,13 @@ python evaluate_rerank.py
 | `DukeMTMC-ReID-ResNet SLS_ReID` | 76.53% | 88.15% | 91.02% | 93.54% | 60.79% |
 
 ### Multi-query results for Market-1501 dataset
-```bash
-ResNet baseline Rank@1:0.912708 Rank@5:0.968527 Rank@10:0.981888 mAP:0.769397	
-DenseNet baseline Rank@1:0.929038 Rank@5:0.978919 Rank@10:0.986936 mAP:0.812179	
-Resnet SLS_ReID Rank@1:0.922506 Rank@5:0.975059 Rank@10:0.983373 mAP:0.819236
-Dense SLS_ReID Rank@1:0.940618 Rank@5:0.981591 Rank@10:0.988420 mAP:0.851966							
-```
+
+| Dataset | Rank 1 | Rank 5 | Rank 10 | mAP |
+| --- | --- | --- | --- | --- |
+| ResNet baseline | 91.27% | 96.85% | 98.19% | 76.94% |	
+| DenseNet baseline | 92.90% | 97.89% | 98.69% | 81.22% |	
+| Resnet SLS_ReID | 92.25% | 97.51% | 98.34% | 81.92% |
+| Dense SLS_ReID | 94.06% | 98.16% | 98.84% | 85.20% |
 
 ### References
 

@@ -1,20 +1,18 @@
 from __future__ import print_function, division
-import cv2
+
 import argparse
+
+import matplotlib
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.optim import lr_scheduler
 from torch.autograd import Variable
-import numpy as np
-import torchvision
-from torchvision import datasets, models, transforms
+from torch.optim import lr_scheduler
+from torchvision import transforms
 from torchvision.datasets.folder import default_loader
-import matplotlib
 
 matplotlib.use('agg')
-import matplotlib.pyplot as plt
-from PIL import Image
 import time
 import os
 from model import ft_net, ft_net_dense

@@ -3,22 +3,19 @@
 from __future__ import print_function, division
 
 import argparse
+
+import matplotlib
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.optim import lr_scheduler
 from torch.autograd import Variable
-import numpy as np
-import torchvision
-from torchvision import datasets, models, transforms
-import matplotlib
+from torch.optim import lr_scheduler
+from torchvision import datasets, transforms
 
 matplotlib.use('agg')
-import matplotlib.pyplot as plt
-from PIL import Image
 import time
 import os
-from model import ft_net, ft_net_dense, PCB
+from model import ft_net, ft_net_dense
 from random_erasing import RandomErasing
 import json
 

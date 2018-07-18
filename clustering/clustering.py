@@ -28,15 +28,8 @@ args = vars(ap.parse_args())
 
 N_CLUSTER = 5
 RANGE_CLUSTERS = [2, 3, 4, 5]
-# Market 1501
-N_CLASSES = 751
-# Duke
-N_CLASSES = 702
-# CUHK03
-N_CLASSES = 1367
-# VIPeR
-N_CLASSES = 316
-DATASET = '/home/paul/datasets/viper'
+
+DATASET = '/home/paul/datasets/market1501'
 CHECKPOINT = './pretrain/viper_softmax_pretrain.h5'
 
 LIST = os.path.join(DATASET, 'train.list')
