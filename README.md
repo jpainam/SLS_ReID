@@ -76,7 +76,17 @@ python evaluate_rerank.py
 | Dense SLS_ReID | 94.06% | 98.16% | 98.84% | 85.20% |
 
 ### References
-
+```
+@ARTICLE{AinamSLSR2018,
+    author = {{Ainam}, J.-P. and {Qin}, K. and {Liu}, G. and {Luo}, G.},
+    title = "{Sparse Label Smoothing for Semi-supervised Person Re-Identification}",
+    journal = {ArXiv e-prints},
+    archivePrefix = "arXiv",
+    eprint = {1809.04976},
+    year = 2018,
+    month = sep,
+}
+```
 
 
 
