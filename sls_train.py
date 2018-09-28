@@ -159,36 +159,25 @@ class dcganDataset(Dataset):
 
 
 class SLSloss(nn.Module):
-    def __init__(self):  # change target to range(0,750)
+    def __init__(self):  
         super(SLSloss, self).__init__()
-        # input means the prediction score(torch Variable) 32*752,target means the corresponding label,
 
-    def forward(self, input, target,
-                flg):  # while flg means the flag(=0 for true data and 1 for generated data)  batchsize*1
-        # print(type(input))
-        if input.dim() > 2:  # N defines the number of images, C defines channels,  K class in total
-            input = input.view(input.size(0), input.size(1), -1)  # N,C,H,W => N,C,H*W
-            input = input.transpose(1, 2)  # N,C,H*W => N,H*W,C
-            input = input.contiguous().view(-1, input.size(2))  # N,H*W,C => N*H*W,C
 
-        # normalize input
-        maxRow, _ = torch.max(input.data, 1)  # outputs.data  return the index of the biggest value in each row
+    def forward(self, input, target, flg): 
+        if input.dim() > 2:  
+            input = input.view(input.size(0), input.size(1), -1)  
+            input = input.transpose(1, 2)  
+            input = input.contiguous().view(-1, input.size(2))  
+        maxRow, _ = torch.max(input.data, 1) 
         maxRow = maxRow.unsqueeze(1)
         input.data = input.data - maxRow
-
-        # target = target.view(-1, 1)  # batchsize*1
         flg = flg.view(-1, 1)
-        # len=flg.size()[0]
-        flos = F.log_softmax(input)  # N*K?      batchsize*7
-        #size_i = flos.size(1) - (target == 0).sum(dim=1)
-        #size_i = size_i.type(torch.cuda.FloatTensor)
-        flos = torch.sum(flos, 1) / flos.size(1)  # N*1  get average  #     gan loss
-        #flos = torch.sum(flos, 1) / size_i
-        logpt = F.log_softmax(input)  # size: batchsize*751
+        flos = F.log_softmax(input)  
+        flos = torch.sum(flos, 1) / flos.size(1)  
+        logpt = F.log_softmax(input) 
         logpt = torch.mul(logpt, target)
-        # logpt = torch.mean(logpt, 1, True)
         logpt = torch.sum(logpt, 1, True)
-        logpt = logpt.view(-1)  # N*1     original loss
+        logpt = logpt.view(-1) 
         flg = flg.view(-1)
         flg = flg.type(torch.cuda.FloatTensor)
         loss = -1 * logpt * (1 - flg) - flos * flg
@@ -204,20 +193,14 @@ dataloaders['val'] = DataLoader(dcganDataset('val_new', data_transforms['val']),
 dataset_sizes = {}
 dataset_train_dir = os.path.join(data_dir, 'train_new')
 dataset_val_dir = os.path.join(data_dir, 'val_new')
-# dataset_sizes['train'] = sum(len(os.listdir(os.path.join(dataset_train_dir, i))) for i in os.listdir(dataset_train_dir))
+
 dataset_sizes['val'] = sum(len(os.listdir(os.path.join(dataset_val_dir, i))) for i in os.listdir(dataset_val_dir))
 dataset_sizes['train'] = 632 + generated_image_size - dataset_sizes['val']
 print(dataset_sizes['train'])
 print(dataset_sizes['val'])
 
-# class_names['train']=len(os.listdir(dataset_train_dir))
-# class_names['val']=len(os.listdir(dataset_val_dir))
 use_gpu = torch.cuda.is_available()
 
-# class_names={}
-######################################################################
-# Training the model
-# ------------------
 
 y_loss = {}  # loss history
 y_loss['train'] = []
@@ -229,8 +212,7 @@ y_err['val'] = []
 
 def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
     since = time.time()
-    #model.load_state_dict(torch.load('./model/duke_plrso_resnet/net_67.pth'))
-    #print('load checkpoint model')
+    
     best_model_wts = model.state_dict()
     best_acc = 0.0
 
@@ -289,11 +271,11 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
                 # print('running_corrects: '+str(running_corrects))
 
             epoch_loss = running_loss / dataset_sizes[phase]
-            # epoch_acc = running_corrects / dataset_sizes[phase]
+           
             if phase == 'train':
-                # epoch_acc = running_corrects / (dataset_sizes[phase]-4992)    # 4992 generated image in total
+               
                 epoch_acc = running_corrects / (
-                        dataset_sizes[phase] - generated_image_size)  # 4992 generated image in total
+                        dataset_sizes[phase] - generated_image_size)  
             else:
                 epoch_acc = running_corrects / dataset_sizes[phase]
 
@@ -301,7 +283,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
                 phase, epoch_loss, epoch_acc))
             y_loss[phase].append(epoch_loss)
             y_err[phase].append(1.0 - epoch_acc)
-            # deep copy the model
+           
             if phase == 'val':
                 if epoch_acc > best_acc:
                     best_acc = epoch_acc
@@ -322,10 +304,6 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
     save_network(model, 'best')
     return model
 
-
-######################################################################
-# Save model
-# ---------------------------
 def save_network(network, epoch_label):
     save_filename = 'net_%s.pth'% epoch_label
     save_path = os.path.join('./model',name,save_filename)
@@ -333,11 +311,8 @@ def save_network(network, epoch_label):
     if torch.cuda.is_available:
         network.cuda(gpu_ids[0])
 
-
-# print('------------'+str(len(clas_names))+'--------------')
 if opt.use_dense:
-    # print(len(class_names['train']))
-    model = ft_net_dense(n_classes)  # 751 class for training data in market 1501 in total
+    model = ft_net_dense(n_classes)  
 else:
     model = ft_net(n_classes)
 
@@ -348,23 +323,18 @@ criterion = SLSloss()
 ignored_params = list(map(id, model.model.fc.parameters())) + list(map(id, model.classifier.parameters()))
 base_params = filter(lambda p: id(p) not in ignored_params, model.parameters())
 
-# Observe that all parameters are being optimized
 optimizer_ft = optim.SGD([
     {'params': base_params, 'lr': 0.01},
     {'params': model.model.fc.parameters(), 'lr': 0.05},
     {'params': model.classifier.parameters(), 'lr': 0.05}
 ], momentum=0.9, weight_decay=5e-4, nesterov=True)
 
-# model = nn.DataParallel(model, device_ids=[0 1, 2])  # multi-GPU
-
-# Decay LR by a factor of 0.1 every 40 epochs
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=40, gamma=0.1)
 
 dir_name = os.path.join('./model', name)
 if not os.path.isdir(dir_name):
     os.mkdir(dir_name)
 
-# save opts
 with open('%s/opts.json' % dir_name, 'w') as fp:
     json.dump(vars(opt), fp, indent=1)
 

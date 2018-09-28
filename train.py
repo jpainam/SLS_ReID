@@ -45,13 +45,7 @@ for str_id in str_ids:
 # set gpu ids
 if len(gpu_ids) > 0:
     torch.cuda.set_device(gpu_ids[0])
-# print(gpu_ids[0])
 
-
-######################################################################
-# Load Data
-# ---------
-#
 '''width = 256
 random_width_crop = 256
 height = 256
@@ -64,7 +58,7 @@ if opt.use_dense:
 '''
 
 transform_train_list = [
-    # transforms.RandomResizedCrop(size=128, scale=(0.75,1.0), ratio=(0.75,1.3333), interpolation=3), #Image.BICUBIC)
+
     transforms.Resize((288, 144), interpolation=3),
     transforms.RandomCrop((256, 128)),
     transforms.RandomHorizontalFlip(),
@@ -123,19 +117,6 @@ class_names = image_datasets['train'].classes
 use_gpu = torch.cuda.is_available()
 
 inputs, classes = next(iter(dataloaders['train']))
-
-######################################################################
-# Training the model
-# ------------------
-#
-# Now, let's write a general function to train a model. Here, we will
-# illustrate:
-#
-# -  Scheduling the learning rate
-# -  Saving the best model
-#
-# In the following, parameter ``scheduler`` is an LR scheduler object from
-# ``torch.optim.lr_scheduler``.
 
 y_loss = {}  # loss history
 y_loss['train'] = []
@@ -223,15 +204,8 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
     save_network(model, 'last')
     return model
 
-
-######################################################################
-# Draw Curve
-# ---------------------------
 x_epoch = []
 
-######################################################################
-# Save model
-# ---------------------------
 def save_network(network, epoch_label):
     save_filename = 'net_%s.pth' % epoch_label
     save_path = os.path.join('./model', name, save_filename)
@@ -239,13 +213,6 @@ def save_network(network, epoch_label):
     if torch.cuda.is_available:
         network.cuda(gpu_ids[0])
 
-
-######################################################################
-# Finetuning the convnet
-# ----------------------
-#
-# Load a pretrainied model and reset final fully connected layer.
-#
 
 if opt.use_dense:
     model = ft_net_dense(len(class_names))
@@ -271,12 +238,6 @@ optimizer_ft = optim.SGD([
 # Decay LR by a factor of 0.1 every 40 epochs
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=40, gamma=0.1)
 
-######################################################################
-# Train and evaluate
-# ^^^^^^^^^^^^^^^^^^
-#
-# It should take around 1-2 hours on GPU. 
-#
 
 dir_name = os.path.join('./model', name)
 if not os.path.isdir(dir_name):
