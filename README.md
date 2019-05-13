@@ -83,13 +83,14 @@ python evaluate_rerank.py
 ### References
 ```
 @ARTICLE{AinamSLSR2018,
-    author = {{Ainam}, J.-P. and {Qin}, K. and {Liu}, G. and {Luo}, G.},
-    title = "{Sparse Label Smoothing for Semi-supervised Person Re-Identification}",
-    journal = {ArXiv e-prints},
-    archivePrefix = "arXiv",
-    eprint = {1809.04976},
-    year = 2018,
-    month = sep,
+author={J. {Ainam} and K. {Qin} and G. {Liu} and G. {Luo}}, 
+journal={IEEE Access}, 
+title={Sparse Label Smoothing Regularization for Person Re-Identification}, 
+year={2019}, 
+volume={7},  
+pages={27899-27910},  
+doi={10.1109/ACCESS.2019.2901599}, 
+ISSN={2169-3536}
 }
 ```
 
