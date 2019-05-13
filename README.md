@@ -32,6 +32,11 @@ Add `--use_dense` argument to train using `DenseNet121` architecture
 | VIPeR | [viper/dense.pth](https://drive.google.com/open?id=15MToMvqenWW7XmygATfm0WdjXIk6kU2J) | [viper/resnet.pth](https://drive.google.com/open?id=1cvEWoEflXGkp6FQ3n3_sa3gOGtbb4s2o) | [viper/dense_slsreid.pth](https://drive.google.com/open?id=1_gepm1yvi0dsoB3rv_uRof6MasSLVyg8) | [viper/resnet_slsreid.pth](https://drive.google.com/open?id=1iVwJC8VYfGaHoUJViZglS1v2tcb2wQi2) |  
 | DukeMTMCReID | [duke/dense.pth](https://drive.google.com/open?id=1tg-gEF87DoRLaBGVgfo6bXlZR-Rdm_uh) | [duke/resnet.pth](https://drive.google.com/open?id=1H-T-oegGeHB6x-QG5TEtFeMrrN1eLn_M) | [duke/dense_slsreid.pth](https://drive.google.com/open?id=139ngCD9PuHIQvqV4X5bZ-4_Y8G-ZQ03S)| [duke/resnet_slsreid.pth](https://drive.google.com/open?id=1a6scaF0-rnTbpn5gbEGlzgXhK0R4X_LI) |
 
+To generate the GAN label (`gan%.list` ie `gan0.list`, `gan1.list` and `gan2.list` for three cluster ), run `generate_labels_for_gan`:
+ 
+ ```
+ python prepare_gan_data.py
+ ```
 ### Testing
 
 ```bash
